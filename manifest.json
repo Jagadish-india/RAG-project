@@ -1,0 +1,89 @@
+{
+  "name": "StudyBuddy - AI Study Tutor",
+  "short_name": "StudyBuddy",
+  "description": "A colorful and fun AI-powered study tutor for kids, featuring interactive learning across multiple subjects with Gemini AI.",
+  "version": "1.0.0",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#FF6B6B",
+  "background_color": "#667eea",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["education", "kids", "learning", "ai"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCA3MiA3MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiByeD0iMTYiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF9saW5lYXJfMV8xIiB4MT0iMCIgeTE9IjAiIHgyPSI3MiIgeTI9IjcyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNGRjZCNkIiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNDVCN0QxIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2ZyB4PSIyMCIgeT0iMTUiIHdpZHRoPSIzMiIgaGVpZ2h0PSI0MiIgdmlld0JveD0iMCAwIDMyIDQyIiBmaWxsPSJub25lIj4KPCEtLSBSb2JvdCBIZWFkIC0tPgo8cmVjdCB3aWR0aD0iMzIiIGhlaWdodD0iMjQiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIvPgo8IS0tIEV5ZXMgLS0+CjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjMiIGZpbGw9IiNGRjZCNkIiLz4KPGNpcmNsZSBjeD0iMjIiIGN5PSIxMCIgcj0iMyIgZmlsbD0iIzQ1QjdEMSIvPgo8IS0tIE1vdXRoIC0tPgo8ZWxsaXBzZSBjeD0iMTYiIGN5PSIxOCIgcng9IjQiIHJ5PSIyIiBmaWxsPSIjNEVDREMwIi8+CjwhLS0gQm9keSAtLT4KPHJlY3QgeT0iMjQiIHdpZHRoPSIzMiIgaGVpZ2h0PSIxOCIgcng9IjQiIGZpbGw9IndoaXRlIi8+CjwhLS0gQnV0dG9ucyAtLT4KPGNpcmNsZSBjeD0iMTYiIGN5PSIzMCIgcj0iMiIgZmlsbD0iIzk2Q0VCNCIvPgo8Y2lyY2xlIGN4PSIxNiIgY3k9IjM2IiByPSIyIiBmaWxsPSIjRkZFQUE3Ii8+Cjwvc3ZnPgo8L3N2Zz4K",
+      "sizes": "72x72",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF9saW5lYXJfMV8xIiB4MT0iMCIgeTE9IjAiIHgyPSI5NiIgeTI9Ijk2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNGRjZCNkIiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNDVCN0QxIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2ZyB4PSIyNCIgeT0iMTgiIHdpZHRoPSI0OCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDQ4IDYwIiBmaWxsPSJub25lIj4KPCEtLSBSb2JvdCBIZWFkIC0tPgo8cmVjdCB3aWR0aD0iNDgiIGhlaWdodD0iMzYiIHJ4PSIxMiIgZmlsbD0id2hpdGUiLz4KPCEtLSBFeWVzIC0tPgo8Y2lyY2xlIGN4PSIxNSIgY3k9IjE1IiByPSI0IiBmaWxsPSIjRkY2QjZCIi8+CjxjaXJjbGUgY3g9IjMzIiBjeT0iMTUiIHI9IjQiIGZpbGw9IiM0NUI3RDEiLz4KPCEtLSBNb3V0aCAtLT4KPGVsbGlwc2UgY3g9IjI0IiBjeT0iMjciIHJ4PSI2IiByeT0iMyIgZmlsbD0iIzRFQ0RDNCIvPgo8IS0tIEJvZHkgLS0+CjxyZWN0IHk9IjM2IiB3aWR0aD0iNDgiIGhlaWdodD0iMjQiIHJ4PSI2IiBmaWxsPSJ3aGl0ZSIvPgo8IS0tIEJ1dHRvbnMgLS0+CjxjaXJjbGUgY3g9IjI0IiBjeT0iNDQiIHI9IjMiIGZpbGw9IiM5NkNFQjQiLz4KPGNpcmNsZSBjeD0iMjQiIGN5PSI1MiIgcj0iMyIgZmlsbD0iI0ZGRUFBNyIvPgo8L3N2Zz4KPC9zdmc+",
+      "sizes": "96x96",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjE0NCIgdmlld0JveD0iMCAwIDE0NCAxNDQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNDQiIGhlaWdodD0iMTQ0IiByeD0iMzIiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF9saW5lYXJfMV8xIiB4MT0iMCIgeTE9IjAiIHgyPSIxNDQiIHkyPSIxNDQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0ZGNkI2QiIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM0NUI3RDEiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8c3ZnIHg9IjM2IiB5PSIyNyIgd2lkdGg9IjcyIiBoZWlnaHQ9IjkwIiB2aWV3Qm94PSIwIDAgNzIgOTAiIGZpbGw9Im5vbmUiPgo8IS0tIFJvYm90IEhlYWQgLS0+CjxyZWN0IHdpZHRoPSI3MiIgaGVpZ2h0PSI1NCIgcng9IjE4IiBmaWxsPSJ3aGl0ZSIvPgo8IS0tIEV5ZXMgLS0+CjxjaXJjbGUgY3g9IjIyIiBjeT0iMjIiIHI9IjYiIGZpbGw9IiNGRjZCNkIiLz4KPGNpcmNsZSBjeD0iNTAiIGN5PSIyMiIgcj0iNiIgZmlsbD0iIzQ1QjdEMSIvPgo8IS0tIE1vdXRoIC0tPgo8ZWxsaXBzZSBjeD0iMzYiIGN5PSI0MCIgcng9IjkiIHJ5PSI0IiBmaWxsPSIjNEVDREMwIi8+CjwhLS0gQm9keSAtLT4KPHJlY3QgeT0iNTQiIHdpZHRoPSI3MiIgaGVpZ2h0PSIzNiIgcng9IjkiIGZpbGw9IndoaXRlIi8+CjwhLS0gQnV0dG9ucyAtLT4KPGNpcmNsZSBjeD0iMzYiIGN5PSI2NiIgcj0iNCIgZmlsbD0iIzk2Q0VCNCIvPgo8Y2lyY2xlIGN4PSIzNiIgY3k9Ijc4IiByPSI0IiBmaWxsPSIjRkZFQUE3Ii8+Cjwvc3ZnPgo8L3N2Zz4K",
+      "sizes": "144x144",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iNDIiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF9saW5lYXJfMV8xIiB4MT0iMCIgeTE9IjAiIHgyPSIxOTIiIHkyPSIxOTIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0ZGNkI2QiIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM0NUI3RDEiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8c3ZnIHg9IjQ4IiB5PSIzNiIgd2lkdGg9Ijk2IiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDk2IDEyMCIgZmlsbD0ibm9uZSI+CjwhLS0gUm9ib3QgSGVhZCAtLT4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9IjcyIiByeD0iMjQiIGZpbGw9IndoaXRlIi8+CjwhLS0gRXllcyAtLT4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iOCIgZmlsbD0iI0ZGNkI2QiIvPgo8Y2lyY2xlIGN4PSI2NiIgY3k9IjMwIiByPSI4IiBmaWxsPSIjNDVCN0QxIi8+CjwhLS0gTW91dGggLS0+CjxlbGxpcHNlIGN4PSI0OCIgY3k9IjU0IiByeD0iMTIiIHJ5PSI2IiBmaWxsPSIjNEVDREMwIi8+CjwhLS0gQm9keSAtLT4KPHJlY3QgeT0iNzIiIHdpZHRoPSI5NiIgaGVpZ2h0PSI0OCIgcng9IjEyIiBmaWxsPSJ3aGl0ZSIvPgo8IS0tIEJ1dHRvbnMgLS0+CjxjaXJjbGUgY3g9IjQ4IiBjeT0iODgiIHI9IjYiIGZpbGw9IiM5NkNFQjQiLz4KPGNpcmNsZSBjeD0iNDgiIGN5PSIxMDQiIHI9IjYiIGZpbGw9IiNGRkVBQTciLz4KPC9zdmc+Cjwvc3ZnPgo=",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTEyIiBmaWxsPSJ1cmwoI2dyYWRpZW50MF9saW5lYXJfMV8xKSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjAiIHkxPSIwIiB4Mj0iNTEyIiB5Mj0iNTEyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNGRjZCNkIiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNDVCN0QxIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2ZyB4PSIxMjgiIHk9Ijk2IiB3aWR0aD0iMjU2IiBoZWlnaHQ9IjMyMCIgdmlld0JveD0iMCAwIDI1NiAzMjAiIGZpbGw9Im5vbmUiPgo8IS0tIFJvYm90IEhlYWQgLS0+CjxyZWN0IHdpZHRoPSIyNTYiIGhlaWdodD0iMTkyIiByeD0iNjQiIGZpbGw9IndoaXRlIi8+CjwhLS0gRXllcyAtLT4KPGNpcmNsZSBjeD0iODAiIGN5PSI4MCIgcj0iMjAiIGZpbGw9IiNGRjZCNkIiLz4KPGNpcmNsZSBjeD0iMTc2IiBjeT0iODAiIHI9IjIwIiBmaWxsPSIjNDVCN0QxIi8+CjwhLS0gTW91dGggLS0+CjxlbGxpcHNlIGN4PSIxMjgiIGN5PSIxNDQiIHJ4PSIzMiIgcnk9IjE2IiBmaWxsPSIjNEVDREMwIi8+CjwhLS0gQm9keSAtLT4KPHJlY3QgeT0iMTkyIiB3aWR0aD0iMjU2IiBoZWlnaHQ9IjEyOCIgcng9IjMyIiBmaWxsPSJ3aGl0ZSIvPgo8IS0tIEJ1dHRvbnMgLS0+CjxjaXJjbGUgY3g9IjEyOCIgY3k9IjIzNiIgcj0iMTYiIGZpbGw9IiM5NkNFQjQiLz4KPGNpcmNsZSBjeD0iMTI4IiBjeT0iMjc2IiByPSIxNiIgZmlsbD0iI0ZGRUFBNyIvPgo8L3N2Zz4KPC9zdmc+",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjU2OCIgdmlld0JveD0iMCAwIDMyMCA1NjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iNTY4IiBmaWxsPSJ1cmwoI2dyYWRpZW50MF9saW5lYXJfMV8xKSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjAiIHkxPSIwIiB4Mj0iMzIwIiB5Mj0iNTY4IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzY0YmEyIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHRleHQgeD0iMTYwIiB5PSIxMDAiIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TdHVkeUJ1ZGR5PC90ZXh0Pgo8dGV4dCB4PSIxNjAiIHk9IjEzMCIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+WW91ciBBSSBTdHVkeSBGcmllbmQhPC90ZXh0Pgo8IS0tIFN1YmplY3QgR3JpZCAtLT4KPHJlY3QgeD0iNDAiIHk9IjE4MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiByeD0iMTIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjE0MCIgeT0iMTgwIiB3aWR0aD0iODAiIGhlaWdodD0iODAiIHJ4PSIxMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iNDAiIHk9IjI4MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiByeD0iMTIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjE0MCIgeT0iMjgwIiB3aWR0aD0iODAiIGhlaWdodD0iODAiIHJ4PSIxMiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+",
+      "sizes": "320x568",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Math Tutor",
+      "short_name": "Math",
+      "description": "Start learning math with StudyBuddy",
+      "url": "/?subject=math",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjAiIGZpbGw9IiNGRjZCNkIiLz4KPHN2ZyB4PSIzMiIgeT0iMzIiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIiBmaWxsPSJub25lIj4KPHRleHQgeD0iMTYiIHk9IjIwIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+KzwvdGV4dD4KPC9zdmc+Cjwvc3ZnPg==",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Science Lab",
+      "short_name": "Science",
+      "description": "Explore science with StudyBuddy",
+      "url": "/?subject=science",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjAiIGZpbGw9IiM0NUI3RDEiLz4KPHN2ZyB4PSIzMiIgeT0iMzIiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIiBmaWxsPSJub25lIj4KPHRleHQgeD0iMTYiIHk9IjIwIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iYm9sZCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+UjDwvdGV4dD4KPC9zdmc+Cjwvc3ZnPg==",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "features": [
+    "cross-platform",
+    "fullscreen",
+    "standalone"
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "dir": "ltr",
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7"
+}
