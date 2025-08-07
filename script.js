@@ -9,6 +9,12 @@ class StudyBuddy {
         this.soundEnabled = localStorage.getItem('sound-enabled') !== 'false';
         this.darkMode = localStorage.getItem('dark-mode') === 'true';
         
+        // New properties for age/class tracking
+        this.userAge = localStorage.getItem('user-age') || null;
+        this.userClass = localStorage.getItem('user-class') || null;
+        this.hasAskedAge = localStorage.getItem('has-asked-age') === 'true';
+        this.isFirstConversation = !this.hasAskedAge;
+        
         // Educational prompts for different subjects
         this.subjectPrompts = {
             math: {
@@ -132,6 +138,9 @@ class StudyBuddy {
         // Theme toggle
         document.getElementById('theme-btn').addEventListener('click', () => this.toggleTheme());
 
+        // Reset age button
+        document.getElementById('reset-age-btn').addEventListener('click', () => this.resetAge());
+
         // Voice input (if supported)
         if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
             document.getElementById('voice-btn').addEventListener('click', () => this.startVoiceInput());
@@ -171,7 +180,15 @@ class StudyBuddy {
         // Clear messages and show welcome
         const messagesArea = document.getElementById('messages');
         messagesArea.innerHTML = '';
-        this.addMessage('bot', subjectData.welcomeMessage);
+        
+        // Check if we need to ask for age/class first
+        if (!this.hasAskedAge) {
+            this.askForAgeAndClass();
+        } else {
+            // Show personalized welcome message
+            const personalizedWelcome = this.getPersonalizedWelcome(subjectData.welcomeMessage);
+            this.addMessage('bot', personalizedWelcome);
+        }
         
         // Update quick actions
         this.updateQuickActions(subjectData.quickActions);
@@ -273,28 +290,50 @@ class StudyBuddy {
         input.value = '';
         document.getElementById('char-count').textContent = '0';
         
-        // Send to AI
-        await this.sendToGemini(message);
+        // Check if this is an age/class response
+        const isAgeResponse = !this.hasAskedAge;
         
-        // Increment streak
-        this.studyStreak++;
-        localStorage.setItem('study-streak', this.studyStreak.toString());
-        document.getElementById('streak-count').textContent = this.studyStreak;
+        // Send to AI
+        await this.sendToGemini(message, isAgeResponse);
+        
+        // Increment streak only after age is set
+        if (this.hasAskedAge) {
+            this.studyStreak++;
+            localStorage.setItem('study-streak', this.studyStreak.toString());
+            document.getElementById('streak-count').textContent = this.studyStreak;
+        }
         
         this.playSound('send');
     }
 
-    async sendToGemini(message) {
+    async sendToGemini(message, isAgeQuestion = false) {
         const sendBtn = document.getElementById('send-btn');
         const originalContent = sendBtn.innerHTML;
         
-        // Show loading
+        // Add generating message with typing indicator
+        const generatingMessage = this.addGeneratingMessage();
+        
+        // Show loading on send button
         sendBtn.innerHTML = '<div class="loading"></div>';
         sendBtn.disabled = true;
         
         try {
             const subjectData = this.subjectPrompts[this.currentSubject];
-            const systemPrompt = subjectData.systemPrompt + `\n\nDifficulty level: ${this.difficulty}`;
+            let systemPrompt;
+            
+            if (isAgeQuestion) {
+                systemPrompt = `You are StudyBuddy, a friendly AI tutor for kids. The user just told you their age/class. 
+                Acknowledge this warmly and remember it for future conversations. Be encouraging and age-appropriate.
+                User's age/class: ${message}`;
+            } else {
+                systemPrompt = subjectData.systemPrompt + `\n\nDifficulty level: ${this.difficulty}`;
+                if (this.userAge || this.userClass) {
+                    systemPrompt += `\n\nUser's age/class: ${this.userAge || this.userClass}. Always keep this in mind and tailor your responses accordingly.`;
+                }
+            }
+            
+            // Add 15-second delay
+            await this.delay(15000);
             
             const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${this.apiKey}`, {
                 method: 'POST',
@@ -340,10 +379,18 @@ class StudyBuddy {
 
             const data = await response.json();
             
+            // Remove generating message
+            this.removeGeneratingMessage(generatingMessage);
+            
             if (data.candidates && data.candidates[0] && data.candidates[0].content) {
                 const aiResponse = data.candidates[0].content.parts[0].text;
                 this.addMessage('bot', aiResponse);
                 this.playSound('receive');
+                
+                // Handle age/class response
+                if (isAgeQuestion) {
+                    this.handleAgeResponse(message);
+                }
                 
                 // Random encouragement
                 if (Math.random() < 0.3) {
@@ -357,6 +404,7 @@ class StudyBuddy {
             
         } catch (error) {
             console.error('Error calling Gemini API:', error);
+            this.removeGeneratingMessage(generatingMessage);
             this.addMessage('bot', "Oops! I'm having trouble connecting right now. 😅 Can you try asking again?");
             this.playSound('error');
         } finally {
@@ -429,6 +477,18 @@ class StudyBuddy {
         document.getElementById('difficulty').value = this.difficulty;
         document.getElementById('sound-toggle').checked = this.soundEnabled;
         document.getElementById('dark-mode-toggle').checked = this.darkMode;
+        
+        // Update age display
+        const ageDisplay = document.getElementById('current-age-display');
+        if (this.userAge && this.userClass) {
+            ageDisplay.textContent = `Age: ${this.userAge}, Class: ${this.userClass}`;
+        } else if (this.userAge) {
+            ageDisplay.textContent = `${this.userAge}`;
+        } else if (this.userClass) {
+            ageDisplay.textContent = `${this.userClass}`;
+        } else {
+            ageDisplay.textContent = 'Not set';
+        }
     }
 
     closeSettings() {
@@ -608,6 +668,159 @@ class StudyBuddy {
             // Fallback for browsers that don't support Web Audio API
             console.log('Sound effect:', type);
         }
+    }
+
+    // New methods for age/class functionality
+    askForAgeAndClass() {
+        const ageQuestion = `Hi there! 👋 I'm StudyBuddy, your AI study friend! 🤖✨
+        
+        Before we start learning together, I'd love to know more about you so I can help you better! 
+        
+        Could you please tell me:
+        📚 What grade/class are you in? (like "Grade 3" or "Class 5")
+        OR
+        🎂 How old are you? (like "I'm 8 years old")
+        
+        This helps me explain things in the perfect way for you! 😊`;
+        
+        this.addMessage('bot', ageQuestion);
+    }
+
+    handleAgeResponse(response) {
+        // Extract age or class from response
+        const ageMatch = response.match(/(\d+)\s*years?\s*old/i) || response.match(/age\s*(\d+)/i) || response.match(/(\d+)/);
+        const classMatch = response.match(/grade\s*(\d+)/i) || response.match(/class\s*(\d+)/i);
+        
+        if (ageMatch) {
+            this.userAge = ageMatch[1];
+            localStorage.setItem('user-age', this.userAge);
+        }
+        
+        if (classMatch) {
+            this.userClass = classMatch[1];
+            localStorage.setItem('user-class', this.userClass);
+        }
+        
+        // If no specific age/class found, store the whole response
+        if (!ageMatch && !classMatch) {
+            this.userAge = response;
+            localStorage.setItem('user-age', response);
+        }
+        
+        // Mark that we've asked for age
+        this.hasAskedAge = true;
+        localStorage.setItem('has-asked-age', 'true');
+        
+        // Update difficulty based on age if provided
+        if (this.userAge && !isNaN(this.userAge)) {
+            const age = parseInt(this.userAge);
+            if (age <= 8) {
+                this.difficulty = 'beginner';
+            } else if (age <= 11) {
+                this.difficulty = 'elementary';
+            } else {
+                this.difficulty = 'intermediate';
+            }
+            localStorage.setItem('difficulty', this.difficulty);
+        }
+        
+        // Show personalized welcome for current subject
+        setTimeout(() => {
+            const subjectData = this.subjectPrompts[this.currentSubject];
+            const personalizedWelcome = this.getPersonalizedWelcome(subjectData.welcomeMessage);
+            this.addMessage('bot', personalizedWelcome);
+        }, 1000);
+    }
+
+    getPersonalizedWelcome(originalMessage) {
+        let greeting = "Great to see you again! 🌟 ";
+        
+        if (this.userAge && !isNaN(this.userAge)) {
+            greeting += `I remember you're ${this.userAge} years old. `;
+        } else if (this.userClass) {
+            greeting += `I remember you're in ${this.userClass}. `;
+        } else if (this.userAge) {
+            greeting += `I remember you told me: ${this.userAge}. `;
+        }
+        
+        greeting += originalMessage;
+        return greeting;
+    }
+
+    addGeneratingMessage() {
+        const messagesArea = document.getElementById('messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'bot-message generating-message';
+        messageDiv.id = 'generating-message';
+        
+        messageDiv.innerHTML = `
+            <div class="message-avatar">🤖</div>
+            <div class="message-bubble bot-bubble generating-bubble">
+                <div class="generating-content">
+                    <span class="generating-text">StudyBuddy is thinking</span>
+                    <div class="generating-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="generating-timer">
+                    <div class="timer-bar"></div>
+                    <span class="timer-text">Generating response...</span>
+                </div>
+            </div>
+        `;
+        
+        messagesArea.appendChild(messageDiv);
+        messagesArea.scrollTop = messagesArea.scrollHeight;
+        
+        // Animate the timer bar
+        const timerBar = messageDiv.querySelector('.timer-bar');
+        timerBar.style.width = '0%';
+        setTimeout(() => {
+            timerBar.style.transition = 'width 15s linear';
+            timerBar.style.width = '100%';
+        }, 100);
+        
+        return messageDiv;
+    }
+
+    removeGeneratingMessage(messageDiv) {
+        if (messageDiv && messageDiv.parentNode) {
+            messageDiv.parentNode.removeChild(messageDiv);
+        }
+    }
+
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    resetAge() {
+        // Clear age/class information
+        this.userAge = null;
+        this.userClass = null;
+        this.hasAskedAge = false;
+        this.isFirstConversation = true;
+        
+        // Clear from localStorage
+        localStorage.removeItem('user-age');
+        localStorage.removeItem('user-class');
+        localStorage.removeItem('has-asked-age');
+        
+        // Reset streak
+        this.studyStreak = 0;
+        localStorage.setItem('study-streak', '0');
+        document.getElementById('streak-count').textContent = '0';
+        
+        // Update display
+        document.getElementById('current-age-display').textContent = 'Not set';
+        
+        // Show confirmation
+        this.showProgressToast('Age information reset! StudyBuddy will ask again. 🔄');
+        this.playSound('success');
+        
+        // Close settings
+        this.closeSettings();
     }
 }
 

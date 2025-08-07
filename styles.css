@@ -632,6 +632,42 @@ input:checked + .toggle-label:before {
     box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
 }
 
+/* Age Info Display Styles */
+.age-info-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.8rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+#current-age-display {
+    font-weight: 600;
+    color: #333;
+    flex: 1;
+}
+
+.reset-btn {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--animation-speed) ease;
+    white-space: nowrap;
+}
+
+.reset-btn:hover {
+    background: #3db5ad;
+    transform: scale(1.05);
+}
+
 /* Emoji Picker */
 .emoji-picker {
     position: fixed;
@@ -905,4 +941,110 @@ select:focus-visible {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Generating Message Styles */
+.generating-message {
+    animation: slideInUp 0.5s ease-out;
+}
+
+.generating-bubble {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.generating-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.generating-text {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.generating-dots {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.generating-dots span {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: generatingDots 1.5s infinite;
+}
+
+.generating-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.generating-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.generating-timer {
+    position: relative;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.timer-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #4ECDC4 0%, #96CEB4 100%);
+    border-radius: 10px;
+    width: 0%;
+    transition: none;
+}
+
+.timer-text {
+    position: relative;
+    z-index: 2;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes generatingDots {
+    0%, 60%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    30% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+/* Enhanced loading animation for send button */
+.send-btn .loading {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+}
+
+.send-btn .loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
