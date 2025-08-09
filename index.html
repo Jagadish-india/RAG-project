@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 StudyBuddy - Your AI Tutor!</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF6B6B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="StudyBuddy">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="robot-icon">🤖</div>
+            <h2>StudyBuddy is getting ready!</h2>
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app" class="app-container" style="display: none;">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="robot-avatar">🤖</div>
+                    <div class="app-title">
+                        <h1>StudyBuddy</h1>
+                        <p>Your AI Study Friend!</p>
+                    </div>
+                </div>
+                <div class="header-controls">
+                    <button id="settings-btn" class="icon-btn" title="Settings">⚙️</button>
+                    <button id="theme-btn" class="icon-btn" title="Change Theme">🎨</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Subject Selection Panel -->
+        <div id="subject-panel" class="subject-panel">
+            <h3>🎓 What would you like to learn today?</h3>
+            <div class="subject-grid">
+                <button class="subject-btn" data-subject="math">
+                    <div class="subject-icon">🔢</div>
+                    <span>Math</span>
+                </button>
+                <button class="subject-btn" data-subject="science">
+                    <div class="subject-icon">🔬</div>
+                    <span>Science</span>
+                </button>
+                <button class="subject-btn" data-subject="english">
+                    <div class="subject-icon">📚</div>
+                    <span>English</span>
+                </button>
+                <button class="subject-btn" data-subject="history">
+                    <div class="subject-icon">🏛️</div>
+                    <span>History</span>
+                </button>
+                <button class="subject-btn" data-subject="geography">
+                    <div class="subject-icon">🌍</div>
+                    <span>Geography</span>
+                </button>
+                <button class="subject-btn" data-subject="art">
+                    <div class="subject-icon">🎨</div>
+                    <span>Art</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <div id="chat-container" class="chat-container" style="display: none;">
+            <!-- Chat Header -->
+            <div class="chat-header">
+                <button id="back-btn" class="back-btn">← Back</button>
+                <div class="current-subject">
+                    <span id="current-subject-icon">🔢</span>
+                    <span id="current-subject-name">Math</span>
+                </div>
+                <div class="study-streak">
+                    <span>🔥</span>
+                    <span id="streak-count">0</span>
+                </div>
+            </div>
+
+            <!-- Messages Area -->
+            <div id="messages" class="messages-area">
+                <div class="welcome-message">
+                    <div class="bot-message">
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-bubble bot-bubble">
+                            <p>Hi there! I'm StudyBuddy! 🌟</p>
+                            <p>I'm here to help you learn and have fun! What would you like to explore today?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <button class="quick-btn" data-action="explain">🤔 Explain</button>
+                <button class="quick-btn" data-action="example">💡 Example</button>
+                <button class="quick-btn" data-action="quiz">🎯 Quiz Me</button>
+                <button class="quick-btn" data-action="help">❓ Help</button>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-container">
+                    <input type="text" id="user-input" placeholder="Ask me anything! 😊" maxlength="500">
+                    <button id="send-btn" class="send-btn">
+                        <span class="send-icon">🚀</span>
+                    </button>
+                </div>
+                <div class="input-controls">
+                    <button id="voice-btn" class="control-btn" title="Voice Input">🎤</button>
+                    <button id="emoji-btn" class="control-btn" title="Add Emoji">😊</button>
+                    <div class="char-counter">
+                        <span id="char-count">0</span>/500
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settings-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>⚙️ Settings</h3>
+                    <button id="close-settings" class="close-btn">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="setting-group">
+                        <label for="api-key">🔑 Gemini API Key:</label>
+                        <input type="password" id="api-key" placeholder="Enter your Gemini API key">
+                        <small>Your API key is stored locally and never shared.</small>
+                    </div>
+                    <div class="setting-group">
+                        <label for="difficulty">📊 Difficulty Level:</label>
+                        <select id="difficulty">
+                            <option value="beginner">🌱 Beginner (Ages 6-8)</option>
+                            <option value="elementary" selected>📚 Elementary (Ages 9-11)</option>
+                            <option value="intermediate">🎓 Intermediate (Ages 12-14)</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label>🎵 Sound Effects:</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="sound-toggle" checked>
+                            <label for="sound-toggle" class="toggle-label"></label>
+                        </div>
+                    </div>
+                    <div class="setting-group">
+                        <label>🌙 Dark Mode:</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="dark-mode-toggle">
+                            <label for="dark-mode-toggle" class="toggle-label"></label>
+                        </div>
+                    </div>
+                    <div class="setting-group">
+                        <label>👶 Age/Class Information:</label>
+                        <div class="age-info-display">
+                            <span id="current-age-display">Not set</span>
+                            <button type="button" id="reset-age-btn" class="reset-btn">🔄 Reset Age</button>
+                        </div>
+                        <small>Reset this to let StudyBuddy ask for your age again.</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="save-settings" class="primary-btn">💾 Save Settings</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emoji Picker -->
+        <div id="emoji-picker" class="emoji-picker" style="display: none;">
+            <div class="emoji-categories">
+                <button class="emoji-cat-btn active" data-category="smileys">😊</button>
+                <button class="emoji-cat-btn" data-category="animals">🐱</button>
+                <button class="emoji-cat-btn" data-category="food">🍎</button>
+                <button class="emoji-cat-btn" data-category="activities">⚽</button>
+                <button class="emoji-cat-btn" data-category="objects">📚</button>
+            </div>
+            <div class="emoji-grid" id="emoji-grid">
+                <!-- Emojis will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Progress Toast -->
+        <div id="progress-toast" class="progress-toast" style="display: none;">
+            <div class="toast-content">
+                <span class="toast-icon">🎉</span>
+                <span class="toast-message">Great job! Keep learning!</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
